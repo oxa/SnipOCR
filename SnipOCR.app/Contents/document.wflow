@@ -51,7 +51,7 @@
 				<key>ActionParameters</key>
 				<dict>
 					<key>source</key>
-					<string>set screenshotPath to "/tmp/screenshot.png"set outputPath to "/tmp/output"set ocrResult to ""-- Take a screenshot and save it to the screenshotPathdo shell script "screencapture -i " &amp; quoted form of screenshotPath-- Perform OCR using Tesseract on the screenshot and save the text to outputPathdo shell script "/opt/homebrew/bin/tesseract " &amp; quoted form of screenshotPath &amp; " " &amp; quoted form of outputPath &amp; " -l eng+fra+deu"-- Read the OCR resulttry	set ocrResult to read (POSIX file "/tmp/output.txt") as «class utf8»end try-- Copy the result to clipboardset the clipboard to ocrResult</string>
+					<string>set architecture to do shell script "uname -m"set screenshotPath to "/tmp/screenshot.png"set outputPath to "/tmp/output"set ocrResult to ""set tesseractPath to ""if architecture is "arm64" then	-- It's an M1 Mac	set tesseractPath to "/opt/homebrew/bin/tesseract"else if architecture is "x86_64" then	-- It's an Intel Mac	set tesseractPath to "/usr/local/bin/tesseract"else	-- Unknown architecture	display dialog "Unknown architecture: " &amp; architecture	returnend if-- Take a screenshot and save it to the screenshotPathdo shell script "screencapture -i " &amp; quoted form of screenshotPath-- Perform OCR using Tesseract on the screenshot and save the text to outputPathdo shell script tesseractPath &amp; " " &amp; quoted form of screenshotPath &amp; " " &amp; quoted form of outputPath &amp; " -l eng+fra+deu"-- Read the OCR resulttry	set ocrResult to read (POSIX file "/tmp/output.txt") as «class utf8»end try-- Copy the result to clipboardset the clipboard to ocrResult</string>
 				</dict>
 				<key>BundleIdentifier</key>
 				<string>com.apple.Automator.RunScript</string>
@@ -105,7 +105,7 @@ end run</string>
 				<key>isViewVisible</key>
 				<integer>1</integer>
 				<key>location</key>
-				<string>241.000000:543.000000</string>
+				<string>391.000000:609.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Run AppleScript.action/Contents/Resources/Base.lproj/main.nib</string>
 			</dict>
