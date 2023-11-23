@@ -11,7 +11,7 @@ Copy image text to clipboard.
 1) Install dependency :
 
 ```bash
-brew install tesseract-lang
+brew install tesseract tesseract-lang
 ```
 
 2) Move SnipOCR in /Applications folder
